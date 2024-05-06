@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Header and top navigation for the user to more around the website-->
+    <header>
+        <h1>Sugar Boulevard Dinning Hall</h1>
+        
+    </header>
+    <div class="topnav">
+        <a href="Homepage.html">Home</a>
+        <a href= "News.html">News</a>
+        <a href="Contact.html" class="active">Contact</a>
+        <a href="About.html">About</a>
+        <a href="Menu.html">Menu</a>
+    </div>
+<!-- Picture of the owner and top chef for the dining hall who is not for the hit tv series on hulu the bear-->
+    <figure>
+        <img src="https://i.kym-cdn.com/photos/images/original/002/439/660/dca" alt="People">
+    <style>
+        img{
+             width: 400px; 
+                height: auto; 
+                float: right; 
+                margin: 20px; 
+  }
+
+    </style>
+
+    </figure>
+
+    <!-- Information on the owner carmen-->
+    <h1>Our Owner</h1>
+    <p> Meet Carmen Boulevard Berzatto, the heart and soul behind Sugar Boulevard dining hall! With a 
+        passion for culinary excellence and a global perspective on flavors, Carmen brings a wealth of 
+        experience to our kitchen as both our proud owner and head chef. Carmen's journey in the culinary
+     world began at the esteemed University of Houston culinary school, where he honed his skills and developed 
+     a deep appreciation for the art of cooking. Carmen embarked on a culinary adventure that took him across the 
+     globe, from bustling kitchens in Europe to exotic markets in Asia. Along the way, he immersed himself in diverse 
+     cuisines, learning traditional techniques and innovative approaches to shape his culinary identity. Despite his 
+     international success, Carmen's heart always remained in Houston. Driven by a desire to give back to his community 
+     and share his passion for food with our students, Carmen returned home to create something truly special  
+     Sugar Boulevard dining hall. As both owner and head chef, Carmen leads by example, inspiring his team to strive 
+     for excellence in every dish they create. With his guidance and mentorship, our staff is empowered to push 
+     the boundaries of creativity, constantly innovating and refining their craft to deliver unparalleled dining 
+     experiences for our students.
+    </p>
+<!-- Code for a form so that people can submit their info to recive more information-->
+<h2> For more information contact our team below</h2>
+    <form method="post">
+        <label>Name:</label>
+        <input type="text" id="name" required>
+
+        <label>Phone</label>
+        <input type="tel" id="phone" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <p>Preferred contact method:</p>
+        <div class="radio-group">
+            <input type="radio" id="contact_email"
+            value="Email">
+            <label>Email</label>
+
+            <input type="radio" id="contact_phone" value="Phone">
+            <label>Phone</label>
+
+        </div>
+        <!--<button type="submit" style="width: 200px; height: 50px; position: relative; top: 50%; left: 20%">Submit</button> -->
+        <button type="submit" data-message="Form is being submitted..." style="width: 200px; height: 50px; position: relative; top: 50%; left: 20%">Submit</button>
+
+
+    </form>
+<!-- The script stops unwanted inputs or incorrect inputs from being submitted and gives
+     them a popup after clicking submit without leading them to a error page-->
+    <script>
+    document.getElementById('phone').addEventListener('blur', function() {
+        var phone = this.value; // keyword 'this' refers to the password input element
+        let phoneRegex = /^\d{3}-\d{3}-\d{4}$/; // define regular expression pattern to match the phone format XXX-XXX-XXXX
+        if (!phoneRegex.test(this.value)) {
+            alert('phone number must be in the format XXX-XXX-XXXX');
+        }
+    });
+
+    let radioButtons = document.getElementsByClassName('radio-group');
+    for (let radioButton of radioButtons) {
+        radioButton.addEventListener('change', function(e) {
+            alert('A new contact method was selected: ' + e.target.value);
+        });
+    }
+    
+
+    document.querySelector('button[type="submit"]').addEventListener('click', function(e) {
+    e.preventDefault();  
+    alert(e.target.dataset.message);
+    
+});
+</script>
+
+    <footer>
+        <p>&copy; 2024 Sugar Boulevard Dining Hall. All rights reserved.</p>
+        <p>Contact us at <a href="UhSugarBoulevardDining@Cougarnet.edu">UhSugarBoulevardDining@Cougarnet.edu</a>.</p>
+        <div class="logo"><a href="image"><img src="https://www.uh.edu/af-auxiliary-services/_images/logos/dining-services-logo_horizontal_350px.png"></a>
+            <style>
+                .logo img{
+                    width: 150px;
+                    height: auto;
+                    float: right;
+    
+                }
+            </style>
+    
+        </div>
+    </footer>
+</body>

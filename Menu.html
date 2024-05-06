@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+
+
+<body>
+    <!-- Header and top navigation for the user to more around the website-->
+    <header>
+        <h1>Sugar Boulevard Dinning Hall</h1>
+        
+    </header>
+    <div class="topnav">
+        <a href="Homepage.html">Home</a>
+        <a href= "News.html">News</a>
+        <a href="Contact.html">Contact</a>
+        <a href="About.html">About</a>
+        <a href="Menu.html" class="active">Menu</a>
+    </div>
+   
+    <!-- Header and style so everything is formatted in a list like function-->
+   <h2>Menu & Ordering Page</h2>
+   <style>
+    h2{
+        text-align: left;
+    }
+   </style>
+   
+
+    <!-- Images of the food item-->
+
+   <div class="image-container">
+    <img src="https://www.modernhoney.com/wp-content/uploads/2022/05/Double-Double-Cheeseburger-with-Fries-Recipe-scaled.jpg" alt="Image 1">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPlusPuwvcPDr1kLN68DPwk0v_z3ovRIAQm7rCTBaBHQ&s" alt="Image 2">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvpR8uOs8RRGhwPJ8IgMGCocjjf37wPIPJRHhN5SV4ug&s" alt="Image 3">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOmU9vhln1PKT2RhuykGyLSka4NgKIGPoVcxfWBYniZw&s" alt="Image 4">
+    <img src="https://images-cdn.welcomesoftware.com/Zz0zZmEwYTlmODJhZTIxMWVjODdjYWU2ZTYxNWJmMmRjNQ==/Zz0zMTc5YWIwZTBmZmYxMWVjOTBiZDJmOGY5N2ZjYjVhMA%3D%3D.jpg?width=1366" alt="Image 5">
+    <img src="https://img.buzzfeed.com/buzzfeed-static/static/2013-11/enhanced/webdr05/18/17/enhanced-buzz-orig-7491-1384813081-10.jpg?downsize=600:*&output-format=auto&output-quality=auto" alt="Image 6">
+   <!--Makes all the images the same size at the top of the webpage -->
+   <style>
+      img{
+           width: 200px; 
+              height: 244px; 
+              
+}
+
+  </style>
+
+
+
+
+    <!-- The selection and giving the selection a price and item off the menu-->
+   <div class="menu">
+     <div class="menu-item">
+       <span>Burger - $10</span>
+       <input type="checkbox" name="item" value="Burger" data-price="10">
+     </div>
+     <div class="menu-item">
+       <span>Pizza - $12</span>
+       <input type="checkbox" name="item" value="Pizza" data-price="12">
+     </div>
+     <div class="menu-item">
+       <span>Salad - $8</span>
+       <input type="checkbox" name="item" value="Salad" data-price="8">
+     </div>
+     <div class="menu-item">
+        <span>Orange Chicken - $10</span>
+        <input type="checkbox" name="item" value="OrangeChicken" data-price="10">
+      </div>
+      <div class="menu-item">
+        <span>Thai Noodles - $10</span>
+        <input type="checkbox" name="item" value="ThaiNoodles" data-price="10">
+      </div>
+      <div class="menu-item">
+        <span>Chole bhature - $13</span>
+        <input type="checkbox" name="item" value="CholeBhature" data-price="13">
+      </div>
+
+   </div>
+
+   
+   <!--Order form with button that will pop un an alert of what the person is checking out along with a cart that list the items only after they lick add to cart-->
+   </form>
+   <h3>Cart</h3>
+   <ul id="cart"></ul>
+   <h2>Order Summary</h2>
+   <form id="order-form">
+     <div id="order-summary"></div>
+     <label for="name">Any Food Modifications ? :</label>
+     <input type="text" id="request" name="request">
+     <label for="name">Name for pickup:</label>
+     <input type="text" id="name" name="name" required>
+     <button type="button" onclick="addToCart()">Add to Cart</button>
+   </form>
+ 
+   <!--Checkout button -->
+   <ul id="cart"></ul>
+   <button type="button" onclick="checkout()">Checkout</button>
+   
+   <script>
+    //limit for the amount of items allowed in a cart
+    const maxItemsInCart = 4;
+    //puts items in the chart
+     function addToCart() {
+       const selectedItems = Array.from(document.querySelectorAll('input[name="item"]:checked')).map(input => input.value);
+       const cart = document.getElementById('cart');
+          //checking how many items and if it exceeds the limit
+       if (cart.childElementCount + selectedItems.length > maxItemsInCart) {
+      alert(`You can only add ${maxItemsInCart} items to the cart.`);
+            return;
+        }
+    
+       selectedItems.forEach(item => {
+         const listItem = document.createElement('li');
+         listItem.textContent = item;
+         cart.appendChild(listItem);
+       });
+     }
+
+
+     function checkout() {
+       const name = document.getElementById('name').value;
+       const cartItems = Array.from(document.querySelectorAll('#cart li')).map(item => item.textContent);
+       //stops people with empty carts from checking out
+       if (cartItems.length === 0) {
+      alert('Your cart is empty. Please add items before checking out.');
+      return;
+       }
+
+       const totalPrice = cartItems.reduce((total, item) => {
+         const price = parseFloat(document.querySelector(`input[value="${item}"]`).getAttribute('data-price'));
+         return total + price;
+       }, 0);
+       //displays order summary
+       const orderSummary = `${name} Items: ${cartItems.join(', ')} Total Price: $${totalPrice}`;
+       alert(orderSummary); 
+       document.getElementById('cart').innerHTML = '';
+     }
+     </script>
+
+
+
+
+
+
+ <!-- A footer with custom words for the email and a logo put at the bottom of the website-->
+    <footer>
+        <p>&copy; 2024 Sugar Boulevard Dining Hall. All rights reserved.</p>
+        <p>Contact us at <a href="UhSugarBoulevardDining@Cougarnet.edu">UhSugarBoulevardDining@Cougarnet.edu</a>.</p>
+        <div class="logo"><a href="image"><img src="https://www.uh.edu/af-auxiliary-services/_images/logos/dining-services-logo_horizontal_350px.png"></a>
+            <style>
+                .logo img{
+                    width: 150px;
+                    height: auto;
+                    float: right;
+
+                }
+            </style>
+
+        </div>
+    </footer>
+
+
+</body>
+</html>
